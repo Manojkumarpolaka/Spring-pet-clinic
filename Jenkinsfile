@@ -4,7 +4,7 @@ pipeline {
         stage('SCM Checkout') {
             agent { label 'master' }
             steps{
-            git branch: 'main', credentialsId: 'c1a0026b-81c4-4955-9ba0-176bc590a814', url: 'git@github.com:Manojkumarpolaka/Spring-pet-clinic.git'
+            git url: 'https://github.com/Manojkumarpolaka/Spring-pet-clinic.git', branch: "main"
             }
         }
 
