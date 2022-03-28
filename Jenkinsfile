@@ -11,8 +11,10 @@ pipeline {
         stage('Build package') {
             agent { label 'mvn3.8.5' }
             steps{
-                sh echo "PATH=${PATH}"
-                sh echo "M2_HOME=${M2_HOME}"
+                sh ''' 
+                echo "PATH=${PATH}"
+                echo "M2_HOME=${M2_HOME}"
+                '''
                 sh '/usr/local/apache-maven-3.8.4/bin/mvn clean package'
             }
         }
