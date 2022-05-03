@@ -11,14 +11,14 @@ pipeline {
         stage('Build package') {
             agent { label 'maven_docker' }
             steps{
-                sh 'mvn clean package'
+                sh 'sudo mvn clean package'
             }
         }
 
         stage('Build docker image') {
             agent { label 'maven_docker' }
             steps {  
-                sh 'docker build -t samplespc:$BUILD_NUMBER .'
+                sh 'sudo docker build -t samplespc:$BUILD_NUMBER .'
             }
         }
     }
