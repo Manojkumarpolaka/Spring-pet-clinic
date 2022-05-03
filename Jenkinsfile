@@ -9,18 +9,14 @@ pipeline {
         }
 
         stage('Build package') {
-            agent { label 'mvn3.8.5' }
+            agent { label 'maven_docker' }
             steps{
-                sh ''' 
-                echo "PATH=${PATH}"
-                echo "M2_HOME=${M2_HOME}"
-                '''
-                sh '/usr/local/apache-maven-3.8.5/bin/mvn clean package'
+                sh mvn clean package
             }
         }
 
         stage('Build docker image') {
-            agent { label 'master' }
+            agent { label 'maven_docker' }
             steps {  
                 sh 'docker build -t samplespc:$BUILD_NUMBER .'
             }
