@@ -1,25 +1,15 @@
-pipeline {
-    agent none
-    stages { 
-        stage('SCM Checkout') {
-            agent { label 'master' }
-            steps{
-            git url: 'https://github.com/Manojkumarpolaka/Spring-pet-clinic.git', branch: "main"
-            }
-        }
+node('master') {
+    stage('git') {
+        git branch: 'scripted', url: 'https://github.com/Manojkumarpolaka/Spring-pet-clinic.git'
+    }
+}
+node('mvn3.8.5') {
+    stage('build') {
+        sh '''
+            echo "PATH=${PATH}"
+            echo "M2_HOME=${M2_HOME}"
 
-        stage('Build package') {
-            agent { label 'maven_docker' }
-            steps{
-                sh 'sudo mvn clean package'
-            }
-        }
-
-        stage('Build docker image') {
-            agent { label 'maven_docker' }
-            steps {  
-                sh 'sudo docker build -t samplespc:$BUILD_NUMBER .'
-            }
-        }
+        '''
+        sh '/usr/local/apache-maven-3.8.5/bin/mvn clean package'
     }
 }
