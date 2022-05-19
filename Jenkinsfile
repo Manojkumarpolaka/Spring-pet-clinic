@@ -9,7 +9,7 @@ pipeline {
         }
 
         stage('Build package') {
-            agent { label 'maven_docker' }
+            agent { label 'mvn3.8.5' }
             steps{
                 sh 'sudo mvn clean package'
             }
