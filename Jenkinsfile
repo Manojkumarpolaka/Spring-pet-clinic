@@ -1,7 +1,7 @@
 pipeline {
     agent none
     triggers {
-        cron('0-59 * * * *')
+        cron('0 * * * *')
     }
     stages { 
         stage('SCM Checkout') {
