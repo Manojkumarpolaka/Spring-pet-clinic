@@ -1,5 +1,8 @@
 pipeline {
     agent none
+    triggers {
+        cron('H(0-59) * * * *')
+    }
     stages { 
         stage('SCM Checkout') {
             agent { label 'master' }
