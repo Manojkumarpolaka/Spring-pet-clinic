@@ -14,11 +14,10 @@ pipeline {
         stage('Build package') {
             agent { label 'mvn3.8.5' }
             steps{
-                sh ''' 
-                echo "PATH=${PATH}"
-                echo "M2_HOME=${M2_HOME}"
-                '''
-                sh '/usr/local/apache-maven-3.8.5/bin/mvn clean package'
+                withSonarQubeEnv('SONAR') {
+                    sh '/usr/local/apache-maven-3.8.5/bin/mvn clean package'
+                    sh '/usr/local/apache-maven-3.8.5/bin/mvn sonar:sonar'
+                }
             }
         }
 
