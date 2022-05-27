@@ -10,6 +10,17 @@ pipeline {
             git url: 'https://github.com/Manojkumarpolaka/Spring-pet-clinic.git', branch: "declarative"
             }
         }
+	stage('Artifactory-Configuration') {
+            steps {
+                rtMavenDeployer (
+                    id: 'spc-deployer',
+                    serverId: 'JFROG',
+                    releaseRepo: 'qtecomm-libs-release-local',
+                    snapshotRepo: 'qtecomm-libs-snapshot-local',
+
+                )
+            }
+        }
 
         stage('Build & code analysis') {
             agent { label 'mvn3.8.5' }
