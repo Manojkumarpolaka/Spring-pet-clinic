@@ -11,7 +11,7 @@ pipeline {
             }
         }
 
-        stage('Build package') {
+        stage('Build & code analysis') {
             agent { label 'mvn3.8.5' }
             steps{
                 withSonarQubeEnv(installationName: 'SONAR', envOnly: true, credentialsId: 'SONAR') {
