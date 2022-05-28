@@ -19,6 +19,7 @@ pipeline {
             }
         }
         stage("Quality Gate") {
+            agent { label 'mvn3.8.5' }
             steps {
               timeout(time: 1, unit: 'HOURS') {
                 waitForQualityGate abortPipeline: true
@@ -26,6 +27,7 @@ pipeline {
            }
         }
         stage('reporting') {
+            agent { label 'mvn3.8.5' }
             steps {
                 junit testResults: '**/surefire-reports/*.xml'
             }
