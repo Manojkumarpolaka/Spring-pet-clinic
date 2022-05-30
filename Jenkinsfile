@@ -18,18 +18,21 @@ pipeline {
                 }
             }
         }
-        stage("Quality Gate") {
-            agent { label 'mvn3.8.5' }
-            steps {
-              timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: true
-              }
-           }
-        }
         stage('reporting') {
             agent { label 'mvn3.8.5' }
             steps {
                 junit testResults: '**/surefire-reports/*.xml'
+            }
+        }
+        stage ('Artifactory configuration') {
+            steps {
+                rtMavenDeployer (
+                    id: "MAVEN_DEPLOYER",
+                    serverId: 'JFROG',
+                    releaseRepo: 'spc-libs-release-local',
+                    snapshotRepo: 'spc-libs-snapshot-local'
+                )
+                
             }
         }
     }
