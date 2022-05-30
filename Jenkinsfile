@@ -29,7 +29,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: CREDENTIALS, usernameVariable: 'ARTIFACTORY_USERNAME', passwordVariable: 'ARTIFACTORY_PASSWORD')]) {
                     rtMavenRun (
-                        tool: mvn3.8.5, // Tool name from Jenkins configuration
+                        tool: MAVEN_TOOL, // Tool name from Jenkins configuration
                         pom: 'pom.xml',
                         goals: 'clean install',
                         deployerId: "MAVEN_DEPLOYER"
