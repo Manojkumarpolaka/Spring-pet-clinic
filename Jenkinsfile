@@ -3,7 +3,7 @@ node('mvn3.8.5') {
         git branch: 'scripted', url: 'https://github.com/Manojkumarpolaka/Spring-pet-clinic.git'
     }
     stage('build') {
-        sh '/usr/local/apache-maven-3.8.5/bin/mvn clean package'
+        sh '/usr/local/apache-maven-3.8.5/bin/mvn clean package sonar:sonar'
     }
     stage('reporting') {
            junit testResults: '**/surefire-reports/*.xml'
