@@ -1,4 +1,5 @@
 node('mvn3.8.5') {
+    tool name: 'mvn3.8.5', type: 'maven'
     stage('git') {
         git branch: 'scripted', url: 'https://github.com/Manojkumarpolaka/Spring-pet-clinic.git'
     }
