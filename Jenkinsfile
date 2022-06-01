@@ -1,9 +1,7 @@
-node('master') {
+node('mvn3.8.5') {
     stage('git') {
         git branch: 'scripted', url: 'https://github.com/Manojkumarpolaka/Spring-pet-clinic.git'
     }
-}
-node('mvn3.8.5') {
     stage('build') {
         sh '''
             echo "PATH=${PATH}"
